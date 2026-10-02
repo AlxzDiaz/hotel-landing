@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotel Aguaje · Habitaciones en Puerto Maldonado | Reserva directo</title>
+  <meta name="description" content="Hotel en Puerto Maldonado con habitaciones simples, matrimoniales, dobles, triples y familiares. Aire acondicionado, desayuno buffet, Wi-Fi de fibra y recepción 24 h. Reserva directo por WhatsApp.">
+  <meta name="theme-color" content="#0E1726">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hotel Aguaje · Duerme bien en Puerto Maldonado">
+  <meta property="og:description" content="Habitaciones cómodas con desayuno incluido. Reserva directo por WhatsApp y paga menos que en las apps.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1200&h=630&q=70">
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="saltar" href="#habitaciones">Ir a las habitaciones</a>
+
+  <!-- 0. Anuncio -->
+  <div class="anuncio" id="anuncio" role="region" aria-label="Novedades">
+    <i class="ph-fill ph-sparkle" aria-hidden="true"></i>
+    <span id="anuncio-texto"></span>
+  </div>
+
+  <!-- 1. Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="logo" href="#inicio" aria-label="Inicio">
+        <img src="images/logo.svg" width="44" height="44" alt="">
+        <span class="logo__texto">
+          <span class="logo__nombre" data-nombre></span>
+          <span class="logo__eslogan" data-eslogan></span>
+        </span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#habitaciones">Habitaciones</a>
+        <a href="#incluido">Qué incluye</a>
+        <a href="#tarifas">Tarifas</a>
+        <a href="#hotel">El hotel</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="header__acciones">
+        <button class="btn-reserva" id="abrir-reserva" type="button" aria-label="Ver mi reserva">
+          <i class="ph ph-bed" aria-hidden="true"></i>
+          <span class="btn-reserva__n" id="contador" hidden>0</span>
+        </button>
+        <a class="btn btn--wa btn--sm header__wa" data-wa href="#"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i><span>Reservar</span></a>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero -->
+    <section class="hero" id="inicio">
+      <img class="hero__bg" src="https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1800&q=70" alt="" fetchpriority="high">
+      <div class="container hero__grid">
+        <div class="hero__texto">
+          <div class="hero__ratings" id="hero-ratings"></div>
+          <h1 data-aos="fade-up">Duerme bien,<br><em>descansa de verdad</em></h1>
+          <p class="hero__sub" data-aos="fade-up" data-aos-delay="80">Habitaciones silenciosas con aire acondicionado, colchones ortopédicos, agua caliente las 24 horas y desayuno buffet incluido. En el centro de <span data-ciudad></span>.</p>
+
+          <form class="buscador" id="buscador" data-aos="fade-up" data-aos-delay="140">
+            <label class="buscador__campo">
+              <span><i class="ph ph-sign-in" aria-hidden="true"></i> Llegada</span>
+              <input type="date" id="f-llegada" required>
+            </label>
+            <label class="buscador__campo">
+              <span><i class="ph ph-sign-out" aria-hidden="true"></i> Salida</span>
+              <input type="date" id="f-salida" required>
+            </label>
+            <label class="buscador__campo buscador__campo--corto">
+              <span><i class="ph ph-users" aria-hidden="true"></i> Huéspedes</span>
+              <select id="f-huespedes"></select>
+            </label>
+            <button class="btn btn--accion buscador__btn" type="submit">
+              <i class="ph ph-magnifying-glass" aria-hidden="true"></i> Ver precios
+            </button>
+          </form>
+          <p class="buscador__resumen" id="buscador-resumen" aria-live="polite"></p>
+
+          <ul class="hero__confianza">
+            <li><span class="punto-vivo" aria-hidden="true"></span> Recepción abierta 24 h</li>
+            <li><i class="ph ph-clock" aria-hidden="true"></i> Entrada <span data-checkin></span> · salida <span data-checkout></span></li>
+            <li><i class="ph ph-coffee" aria-hidden="true"></i> Desayuno incluido</li>
+          </ul>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__arco">
+            <img src="https://images.unsplash.com/photo-1631015108968-ba3b87f89005?auto=format&fit=crop&w=700&h=900&q=70" alt="" data-fallback="images/habitaciones/habitacion.svg">
+          </div>
+          <div class="flota flota--1">
+            <i class="ph-fill ph-moon-stars"></i>
+            <div><strong>Cortinas blackout</strong><span>y doble vidrio en ventanas</span></div>
+          </div>
+          <div class="flota flota--2">
+            <i class="ph-fill ph-tag"></i>
+            <div><strong>Hasta 25% menos</strong><span>en estadías por mes</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Cinta -->
+    <div class="cinta" aria-hidden="true"><div class="cinta__pista" id="cinta"></div></div>
+
+    <!-- 4. Qué incluye -->
+    <section class="seccion" id="incluido">
+      <div class="container">
+        <div class="seccion__head" data-aos="fade-up">
+          <span class="eyebrow">Lo que ofrecemos</span>
+          <h2>Todo esto va <em>incluido</em> en tu tarifa</h2>
+          <p>Sin cobros sorpresa. El precio que ves por noche ya trae lo necesario para descansar bien.</p>
+        </div>
+        <div class="incluido" id="incluido-grid"></div>
+      </div>
+    </section>
+
+    <!-- 5. Habitaciones -->
+    <section class="seccion seccion--lino" id="habitaciones">
+      <div class="container">
+        <div class="seccion__head" data-aos="fade-up">
+          <span class="eyebrow">Habitaciones</span>
+          <h2>Elige dónde <em>descansar</em></h2>
+          <p id="hab-resumen">Precios por noche con desayuno incluido.</p>
+        </div>
+        <div class="filtros" id="filtros" role="tablist" aria-label="Filtrar habitaciones"></div>
+        <div class="habitaciones" id="habitaciones-grid"></div>
+        <p class="nota-apps"><i class="ph ph-info" aria-hidden="true"></i> El precio tachado es lo que pagas por la misma habitación en apps de reserva.</p>
+      </div>
+    </section>
+
+    <!-- 6. Tarifas por estadía -->
+    <section class="seccion seccion--noche" id="tarifas">
+      <div class="container">
+        <div class="seccion__head seccion__head--claro" data-aos="fade-up">
+          <span class="eyebrow eyebrow--oscuro">Tarifas por estadía</span>
+          <h2>Mientras más te quedas, <em>menos pagas</em></h2>
+          <p>El descuento se aplica solo al elegir tus fechas. Perfecto si vienes por trabajo, una obra, capacitación o un trámite largo.</p>
+        </div>
+        <div class="tarifas" id="tarifas-grid"></div>
+        <div class="convenio" data-aos="fade-up">
+          <i class="ph ph-buildings" aria-hidden="true"></i>
+          <div>
+            <h3>Convenio para empresas</h3>
+            <p id="convenio-texto"></p>
+          </div>
+          <a class="btn btn--claro" data-wa="Hola, quiero información sobre el convenio para empresas." href="#">Pedir convenio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Reservar directo -->
+    <section class="seccion" id="directo">
+      <div class="container directo">
+        <div class="directo__texto" data-aos="fade-up">
+          <span class="eyebrow">Reserva directo</span>
+          <h2>Mismo cuarto, <em>mejor precio</em></h2>
+          <p>Cuando reservas por una app, el hotel paga hasta 18% de comisión. Si nos escribes directo, ese ahorro es tuyo.</p>
+          <a class="btn btn--wa" data-wa href="#"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp</a>
+        </div>
+        <div class="comparar" data-aos="fade-up" data-aos-delay="100">
+          <table>
+            <thead>
+              <tr><th scope="col"><span class="sr-only">Beneficio</span></th><th scope="col" class="comparar__nos">Directo</th><th scope="col">Apps</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Precio por noche</th><td class="comparar__nos">Más bajo</td><td>+ comisión</td></tr>
+              <tr><th scope="row">Desayuno buffet</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td></tr>
+              <tr><th scope="row">Descuento semanal y mensual</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Recojo gratis desde 4 noches</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Pago con Yape o Plin</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Hablas con el hotel</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. El hotel -->
+    <section class="seccion seccion--lino" id="hotel">
+      <div class="container">
+        <div class="nosotros">
+          <div class="nosotros__foto" data-aos="zoom-in">
+            <img src="https://images.unsplash.com/photo-1759038085950-1234ca8f5fed?auto=format&fit=crop&w=900&h=1000&q=70" alt="Recepción del hotel con mostrador de madera" loading="lazy" data-fallback="images/habitaciones/instalacion.svg">
+          </div>
+          <div class="nosotros__texto" data-aos="fade-up">
+            <span class="eyebrow">El hotel</span>
+            <h2>Un lugar hecho para <em>dormir tranquilo</em></h2>
+            <p>Abrimos en 2012 con 8 habitaciones y una idea simple: que quien llega cansado encuentre una cama buena, agua caliente y silencio. Hoy tenemos 32 habitaciones y seguimos igual de obsesionados con el descanso.</p>
+            <p>Somos un hotel familiar: la misma familia atiende la recepción, revisa cada habitación y prepara el desayuno todas las mañanas.</p>
+            <div class="logros" id="logros"></div>
+          </div>
+        </div>
+        <div class="galeria" id="galeria"></div>
+      </div>
+    </section>
+
+    <!-- 9. Opiniones -->
+    <section class="seccion" id="opiniones">
+      <div class="container">
+        <div class="seccion__head" data-aos="fade-up">
+          <span class="eyebrow">Opiniones</span>
+          <h2>Lo que dicen al <em>despertar</em></h2>
+        </div>
+        <div class="ratings-resumen" id="ratings-resumen"></div>
+        <div class="testimonios" id="testimonios"></div>
+      </div>
+    </section>
+
+    <!-- 10. Políticas y preguntas -->
+    <section class="seccion seccion--lino" id="politicas">
+      <div class="container">
+        <div class="seccion__head" data-aos="fade-up">
+          <span class="eyebrow">Antes de llegar</span>
+          <h2>Reglas <em>claras</em>, sin sorpresas</h2>
+        </div>
+        <div class="politicas" id="politicas-grid"></div>
+        <div class="faq">
+          <h3 class="faq__titulo">Preguntas frecuentes</h3>
+          <div id="faq"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Contacto -->
+    <section class="seccion" id="contacto">
+      <div class="container contacto">
+        <div class="contacto__info" data-aos="fade-up">
+          <span class="eyebrow">Contacto</span>
+          <h2>Te esperamos <em>a cualquier hora</em></h2>
+          <ul class="contacto__lista">
+            <li><i class="ph ph-map-pin" aria-hidden="true"></i><div><strong>Dirección</strong><span data-direccion></span></div></li>
+            <li><i class="ph ph-bell-simple" aria-hidden="true"></i><div><strong>Recepción</strong><span>Abierta las 24 horas, todos los días</span></div></li>
+            <li><i class="ph ph-clock" aria-hidden="true"></i><div><strong>Entrada y salida</strong><span>Entrada desde <span data-checkin></span> · salida hasta <span data-checkout></span></span></div></li>
+            <li><i class="ph ph-phone" aria-hidden="true"></i><div><strong>Teléfono</strong><a data-tel href="#"></a></div></li>
+            <li><i class="ph ph-envelope-simple" aria-hidden="true"></i><div><strong>Correo</strong><a data-email href="#"></a></div></li>
+            <li><i class="ph ph-wallet" aria-hidden="true"></i><div><strong>Medios de pago</strong><span data-pagos></span></div></li>
+          </ul>
+          <div class="contacto__btns">
+            <a class="btn btn--wa" data-wa href="#"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i> Escribir por WhatsApp</a>
+            <a class="btn btn--linea" id="como-llegar" href="#" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow" aria-hidden="true"></i> Cómo llegar</a>
+          </div>
+        </div>
+        <div class="mapa" data-aos="zoom-in">
+          <iframe id="mapa" title="Ubicación del hotel en Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. CTA final -->
+    <section class="cta">
+      <div class="container cta__inner" data-aos="fade-up">
+        <i class="ph-fill ph-moon-stars cta__icono" aria-hidden="true"></i>
+        <h2>¿Listo para <em>descansar</em>?</h2>
+        <p>Elige tu habitación y envíanos tu solicitud. Te confirmamos en minutos.</p>
+        <div class="cta__btns">
+          <a class="btn btn--accion" href="#habitaciones">Ver habitaciones</a>
+          <a class="btn btn--wa" data-wa href="#"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 13. Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a class="logo logo--footer" href="#inicio">
+          <img src="images/logo.svg" width="44" height="44" alt="">
+          <span class="logo__texto"><span class="logo__nombre" data-nombre></span><span class="logo__eslogan" data-eslogan></span></span>
+        </a>
+        <p class="footer__desc">Habitaciones cómodas, desayuno incluido y recepción 24 horas.</p>
+        <div class="redes" id="redes"></div>
+      </div>
+      <div>
+        <h3>Hospedaje</h3>
+        <ul>
+          <li><a href="#habitaciones">Habitaciones</a></li>
+          <li><a href="#incluido">Qué incluye</a></li>
+          <li><a href="#tarifas">Tarifas por semana y mes</a></li>
+          <li><a href="#politicas">Políticas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <ul>
+          <li data-direccion></li>
+          <li><a data-tel href="#"></a></li>
+          <li><a data-email href="#"></a></li>
+          <li>Recepción 24 h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__legal">
+      <span>© <span id="anio"></span> <span data-nombre-plano></span>. Todos los derechos reservados.</span>
+      <span>Calificaciones, reseñas y precios de ejemplo.</span>
+    </div>
+  </footer>
+
+  <!-- Flotantes -->
+  <a class="wa-flotante" id="wa-flotante" data-wa href="#" aria-label="Escribir por WhatsApp"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></a>
+
+  <div class="barra-reserva" id="barra-reserva" hidden>
+    <div class="barra-reserva__info">
+      <strong id="barra-total"></strong>
+      <span id="barra-detalle"></span>
+    </div>
+    <button class="btn btn--accion btn--sm" type="button" id="barra-btn">Ver reserva <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Detalle de habitación -->
+  <dialog class="modal" id="modal-hab" aria-labelledby="modal-titulo">
+    <div class="modal__panel" id="modal-contenido"></div>
+  </dialog>
+
+  <!-- Panel de reserva -->
+  <dialog class="drawer" id="drawer" aria-labelledby="drawer-titulo">
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <h2 id="drawer-titulo">Tu reserva</h2>
+        <button class="icon-btn" type="button" data-cerrar aria-label="Cerrar"><i class="ph ph-x" aria-hidden="true"></i></button>
+      </div>
+      <form class="drawer__body" id="form-reserva" novalidate>
+        <div class="drawer__fechas">
+          <label><span>Llegada</span><input type="date" id="d-llegada" required></label>
+          <label><span>Salida</span><input type="date" id="d-salida" required></label>
+          <label><span>Huéspedes</span><select id="d-huespedes"></select></label>
+        </div>
+        <p class="drawer__noches" id="d-noches"></p>
+
+        <h3 class="drawer__sub">Habitaciones</h3>
+        <div id="d-items"></div>
+        <p class="aviso" id="d-capacidad" hidden></p>
+
+        <h3 class="drawer__sub">Extras <small>opcionales</small></h3>
+        <div class="extras" id="d-extras"></div>
+
+        <div class="resumen" id="d-resumen"></div>
+
+        <h3 class="drawer__sub">Tus datos</h3>
+        <div class="campos">
+          <label class="campo campo--full">
+            <span>Nombre completo *</span>
+            <input type="text" id="c-nombre" autocomplete="name" required>
+            <small class="campo__error">Escribe tu nombre para la reserva.</small>
+          </label>
+          <label class="campo">
+            <span>DNI o pasaporte</span>
+            <input type="text" id="c-doc" inputmode="text" autocomplete="off">
+          </label>
+          <label class="campo">
+            <span>Hora aprox. de llegada</span>
+            <select id="c-hora">
+              <option value="">No lo sé aún</option>
+              <option>Madrugada (12–6 a. m.)</option>
+              <option>Mañana (6–12 a. m.)</option>
+              <option>Tarde (12–6 p. m.)</option>
+              <option>Noche (6–12 p. m.)</option>
+            </select>
+          </label>
+          <label class="campo">
+            <span>Motivo del viaje</span>
+            <select id="c-motivo">
+              <option value="">Prefiero no decir</option>
+              <option>Trabajo</option>
+              <option>Descanso</option>
+              <option>Familia</option>
+              <option>De paso</option>
+              <option>Trámite o salud</option>
+            </select>
+          </label>
+          <label class="campo">
+            <span>Pago del adelanto</span>
+            <select id="c-pago"></select>
+          </label>
+          <label class="campo campo--full campo--check" id="c-factura-wrap">
+            <input type="checkbox" id="c-factura">
+            <span>Necesito factura</span>
+          </label>
+          <label class="campo campo--full" id="c-ruc-wrap" hidden>
+            <span>RUC y razón social</span>
+            <input type="text" id="c-ruc" placeholder="20123456789 · Empresa S.A.C.">
+          </label>
+          <label class="campo campo--full">
+            <span>Notas</span>
+            <textarea id="c-notas" rows="2" placeholder="Piso alto, cama extra, alergias, etc."></textarea>
+          </label>
+        </div>
+      </form>
+      <div class="drawer__foot">
+        <div class="drawer__total">
+          <span>Total estimado</span>
+          <strong id="d-total">S/ 0.00</strong>
+        </div>
+        <button class="btn btn--wa btn--full" type="submit" form="form-reserva" id="d-enviar">
+          <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i> Enviar solicitud por WhatsApp
+        </button>
+        <p class="drawer__legal">No se cobra nada aquí. Te confirmamos la disponibilidad por WhatsApp.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
