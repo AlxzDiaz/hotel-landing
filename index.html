@@ -16,12 +16,17 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tipografías sin bloquear el primer pintado (display=swap muestra texto mientras cargan) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="preconnect" href="https://images.unsplash.com">
 
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="vendor/aos/aos.css">
+  <!-- Los scripts del final se piden ya: así llenan la página antes del primer pintado (evita saltos) -->
+  <link rel="preload" href="vendor/aos/aos.js" as="script">
+  <link rel="preload" href="js/config.js" as="script">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="stylesheet" href="css/iconos.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -36,7 +41,7 @@
   <!-- 1. Header -->
   <header class="header" id="header">
     <div class="container header__inner">
-      <a class="logo" href="#inicio" aria-label="Inicio">
+      <a class="logo" href="#inicio" aria-label="Hotel Aguaje, ir al inicio">
         <img src="images/logo.svg" width="44" height="44" alt="">
         <span class="logo__texto">
           <span class="logo__nombre" data-nombre></span>
@@ -56,7 +61,7 @@
           <i class="ph ph-bed" aria-hidden="true"></i>
           <span class="btn-reserva__n" id="contador" hidden>0</span>
         </button>
-        <a class="btn btn--wa btn--sm header__wa" data-wa href="#"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i><span>Reservar</span></a>
+        <a class="btn btn--wa btn--sm header__wa" data-wa href="#" aria-label="Reservar por WhatsApp"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i><span>Reservar</span></a>
         <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
           <i class="ph ph-list" aria-hidden="true"></i>
         </button>
@@ -67,7 +72,7 @@
   <main>
     <!-- 2. Hero -->
     <section class="hero" id="inicio">
-      <img class="hero__bg" src="https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1800&q=70" alt="" fetchpriority="high">
+      <img class="hero__bg" src="https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1800&q=70" srcset="https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=640&q=70 640w, https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1080&q=70 1080w, https://images.unsplash.com/photo-1711059985570-4c32ed12a12c?auto=format&fit=crop&w=1800&q=70 1800w" sizes="100vw" alt="" fetchpriority="high">
       <div class="container hero__grid">
         <div class="hero__texto">
           <div class="hero__ratings" id="hero-ratings"></div>
@@ -181,11 +186,11 @@
             </thead>
             <tbody>
               <tr><th scope="row">Precio por noche</th><td class="comparar__nos">Más bajo</td><td>+ comisión</td></tr>
-              <tr><th scope="row">Desayuno buffet</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td></tr>
-              <tr><th scope="row">Descuento semanal y mensual</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
-              <tr><th scope="row">Recojo gratis desde 4 noches</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
-              <tr><th scope="row">Pago con Yape o Plin</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
-              <tr><th scope="row">Hablas con el hotel</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Desayuno buffet</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td><td><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td></tr>
+              <tr><th scope="row">Descuento semanal y mensual</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" role="img" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Recojo gratis desde 4 noches</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" role="img" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Pago con Yape o Plin</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" role="img" aria-label="No"></i></td></tr>
+              <tr><th scope="row">Hablas con el hotel</th><td class="comparar__nos"><i class="ph-fill ph-check-circle" role="img" aria-label="Sí"></i></td><td><i class="ph ph-minus-circle" role="img" aria-label="No"></i></td></tr>
             </tbody>
           </table>
         </div>
@@ -418,7 +423,7 @@
     </div>
   </dialog>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="vendor/aos/aos.js"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
   <script src="js/demo-aviso.js"></script>

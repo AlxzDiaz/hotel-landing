@@ -202,6 +202,15 @@ p { margin: 0; }
 .hero__confianza { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: .92rem; color: var(--niebla); }
 .hero__confianza li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .hero__confianza i { color: var(--laton); font-size: 1.15rem; }
+/* Espacio reservado para lo que rellena main.js: sin esto el inicio salta al cargar (CLS) */
+.hero__ratings { min-height: 36px; }
+.cinta__pista { min-height: 35px; }
+@media (max-width: 480px) {
+  .anuncio { min-height: 57px; }
+  .buscador__resumen { min-height: 49px; }
+  .hero__confianza { min-height: 91px; }
+}
+@media (max-width: 374px) { .hero__ratings { min-height: 80px; } }
 .punto-vivo { width: 10px; height: 10px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 0 rgba(37, 211, 102, .6); animation: late 2s infinite; }
 @keyframes late { 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
