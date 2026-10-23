@@ -12,7 +12,7 @@
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const soles = (n) => "S/ " + n.toFixed(2);
   const solesCorto = (n) => "S/ " + (Number.isInteger(n) ? n : n.toFixed(2));
-  const waLink = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent((CONFIG.demo ? "[Demo ALXZ//] " : "") + msg)}`;
   const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Fechas (todas como "AAAA-MM-DD", hora de Perú) ---------- */
